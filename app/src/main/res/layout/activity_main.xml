@@ -8,19 +8,55 @@
     android:background="#ffffff"
     android:layout_height="match_parent"
     tools:context=".view.ui.MainActivity">
-<com.google.android.material.textview.MaterialTextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Jahangirnagar University\nBus Booking System"
-    android:gravity="center_horizontal"
-    android:textColor="#000000"
-    android:paddingVertical="10dp"
-    android:textSize="18dp"
-    android:textAlignment="center"
-    />
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/recyclerview"
-    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#EFF8ED"
+        android:paddingVertical="5dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        >
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:text="Jahangirnagar University\nBus Booking System"
+            android:gravity="center_horizontal"
+            android:textColor="#000000"
+            android:paddingVertical="10dp"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/logo"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="18dp"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerview"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="18dp"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerview2"
+            />
+    </LinearLayout>
+
 </LinearLayout>

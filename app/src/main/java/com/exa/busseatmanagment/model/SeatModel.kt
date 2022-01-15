@@ -10,6 +10,8 @@ class SeatModel {
         this.available = available
         this.booking = booking
     }
+    constructor()
+
 }
 /*lateinit var name:String
     lateinit var number:String
