@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BusSeatManagment">
         <activity
-            android:name=".view.ui.SplashScreen"
+            android:name=".view.ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,7 @@
             android:name=".view.ui.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ui.LoginActivity"
+            android:name=".view.ui.SplashScreen"
             android:exported="true">
         </activity>
     </application>

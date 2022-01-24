@@ -9,25 +9,22 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 
 class SplashScreen : AppCompatActivity() {
-    var progressDialog: ProgressDialog? =null
     var firebaseAuth: FirebaseAuth? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.profilel_making)
+        supportActionBar?.hide()
         firebaseAuth= FirebaseAuth.getInstance()
-        progressDialog?.show()
-        checkLogin()
+//        checkLogin()
     }
 
     private fun checkLogin() {
-        if (firebaseAuth?.currentUser !=null){
+        if (firebaseAuth?.currentUser ==null){
             startActivity(Intent(this,MainActivity::class.java))
-            progressDialog?.hide()
             finish()
         }
         else{
             startActivity(Intent(this,LoginActivity::class.java))
-            progressDialog?.hide()
             finish()
         }
     }

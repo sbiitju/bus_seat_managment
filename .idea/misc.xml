@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Development/Shakil/app/src/main/res/drawable/button_backgroun_radius.xml" value="0.17222222222222222" />
         <entry key="..\:/Development/Shakil/app/src/main/res/layout/activity_login.xml" value="0.209375" />
         <entry key="..\:/Development/Shakil/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/Development/Shakil/app/src/main/res/layout/activity_splash_screen.xml" value="0.209375" />
+        <entry key="..\:/Development/Shakil/app/src/main/res/layout/profilel_making.xml" value="0.14356884057971014" />
         <entry key="..\:/Development/Shakil/app/src/main/res/layout/seatlist.xml" value="0.209375" />
+        <entry key="..\:/Development/Shakil/app/src/main/res/menu/top_app_bar.xml" value="0.209375" />
       </map>
     </option>
   </component>

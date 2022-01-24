@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var seatlist:ArrayList<SeatModel>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("Shahin Bashar","On create")
+
         supportActionBar?.hide()
         val binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -71,30 +73,36 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.d("Shahin","On start")
+        Log.d("Shahin Bashar","On start")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("Shahin Bashar","On stop")
+
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("Shahin","On resume")
+        Log.d("Shahin Bashar","On resume")
 
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d("Shahin","On pause")
+        Log.d("Shahin Bashar","On pause")
 
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.d("Shahin","On restart")
+        Log.d("Shahin Bashar","On restart")
 
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("Shahin","On destroy")
+        Log.d("Shahin Bashar","On destroy")
 
     }
 }

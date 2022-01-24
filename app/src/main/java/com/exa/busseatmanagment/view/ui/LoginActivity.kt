@@ -9,7 +9,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.exa.busseatmanagment.R
-import com.exa.busseatmanagment.R.id.facebookBtn
+//import com.exa.busseatmanagment.R.id.facebookBtn
 import com.exa.busseatmanagment.databinding.ActivityLoginBinding
 import com.exa.busseatmanagment.utill.Utility.makeLog
 import com.exa.busseatmanagment.utill.Utility.showToast
@@ -23,7 +23,7 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class LoginActivity : AppCompatActivity(),View.OnClickListener {
+class LoginActivity : AppCompatActivity() {
     lateinit var viewModelProvider: LoginViewModel
     var auth:FirebaseAuth= FirebaseAuth.getInstance()
     lateinit var progressBar: ProgressBar
@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create()
         viewModelProvider=ViewModelProvider(this)[LoginViewModel::class.java]
-        binding.facebookBtn.setOnClickListener(this)
+//        binding.facebookBtn.setOnClickListener(this)
         binding.loginButton.setReadPermissions("email","public_profile")
         binding.loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
@@ -63,24 +63,24 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         }
     }
 
-    override fun onClick(v: View?) {
-        when(v?.id){
-            facebookBtn->{
-                if(viewModelProvider.login("sbiitju@gmail.com","12345678")){
-                    Log.d("Shahin Bashar","Success")
-                }else{
-                    Log.d("Failed","Login Failed")
-                }
-            }
-            R.id.login_button->{
-
-            }
-            else->{
-
-            }
-
-        }
-    }
+//    override fun onClick(v: View?) {
+//        when(v?.id){
+//            facebookBtn->{
+//                if(viewModelProvider.login("sbiitju@gmail.com","12345678")){
+//                    Log.d("Shahin Bashar","Success")
+//                }else{
+//                    Log.d("Failed","Login Failed")
+//                }
+//            }
+//            R.id.login_button->{
+//
+//            }
+//            else->{
+//
+//            }
+//
+//        }
+//    }
     private fun handleFacebookAccessToken(token: AccessToken) {
         Log.d("TOken", "handleFacebookAccessToken:$token")
 
@@ -110,5 +110,14 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
             Toast.makeText(this,"Failed",Toast.LENGTH_LONG)
         }
 
+    }
+
+    fun SignIn(view: android.view.View) {
+        startActivity(Intent(this,MainActivity::class.java))
+        finish()
+    }
+    fun Registration(view: android.view.View) {
+        startActivity(Intent(this,SplashScreen::class.java))
+        finish()
     }
 }
