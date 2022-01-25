@@ -36,7 +36,6 @@
         <item>স্টুডেন্ট বাস</item>
         <item>শিক্ষক বাস</item>
         <item>স্টাফ বাস</item>
-        <item>অ্যাম্বুলেন্স</item>
     </string-array>
     <string-array name="fromto">
         <item>"ক্যাম্পাস হতে"</item>
