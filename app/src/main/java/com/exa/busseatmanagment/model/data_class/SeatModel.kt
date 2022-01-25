@@ -1,4 +1,4 @@
-package com.exa.busseatmanagment.model
+package com.exa.busseatmanagment.model.data_class
 
 class SeatModel {
     lateinit var busName:String
@@ -10,7 +10,6 @@ class SeatModel {
         this.available = available
         this.booking = booking
     }
-    constructor()
 
 }
 /*lateinit var name:String

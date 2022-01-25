@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.exa.busseatmanagment.R
-import com.exa.busseatmanagment.model.SeatModel
+import com.exa.busseatmanagment.model.data_class.SeatModel
 import com.exa.busseatmanagment.viewmodel.SeatViewHolder
 
 class BusSeatAdapter(var context: Context,var seatList: List<SeatModel>): RecyclerView.Adapter<SeatViewHolder>(){

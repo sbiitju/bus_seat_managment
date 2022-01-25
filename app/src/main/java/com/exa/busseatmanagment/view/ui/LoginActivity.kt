@@ -113,11 +113,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun SignIn(view: android.view.View) {
-        startActivity(Intent(this,MainActivity::class.java))
+
+        //new Activity will be opened
+        startActivity(Intent(this,SelectBusActivity::class.java))
         finish()
     }
     fun Registration(view: android.view.View) {
         startActivity(Intent(this,SplashScreen::class.java))
-        finish()
     }
 }

@@ -4,5 +4,107 @@
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_app_id">1076038829839450</string>
     <string name="fb_login_protocol_scheme">fb1076038829839450</string>
+    <string-array name="batch">
+        <item>Teacher</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="bloodgroup">
+        <item>A+</item>
+        <item>B+</item>
+        <item>AB+</item>
+        <item>O+</item>
+        <item>A-</item>
+        <item>B-</item>
+        <item>AB-</item>
+        <item>O-</item>
+    </string-array>
+    <string-array name="bustype">
+        <!--<item>Student Bus</item>-->
+        <!--<item>Teacher Bus</item>-->
+        <!--<item>Stuff Bus</item>-->
+        <!--<item>Ambulence</item>-->
+        <item>স্টুডেন্ট বাস</item>
+        <item>শিক্ষক বাস</item>
+        <item>স্টাফ বাস</item>
+        <item>অ্যাম্বুলেন্স</item>
+    </string-array>
+    <string-array name="fromto">
+        <item>"ক্যাম্পাস হতে"</item>
+        <item>"ঢাকা হতে"</item>
+        <!--<item>From Campus</item>-->
+        <!--<item>From Dhaka</item>-->
+    </string-array>
+    <string-array name="fromtobangla">
+        <item>"ক্যাম্পাস হতে"</item>
+        <item>"ঢাকা হতে"</item>
+    </string-array>
+    <string-array name="time">
+        <!--<item>"6:00AM"</item>-->
+        <!--<item>"7:00AM"</item>-->
+        <!--<item>"7:15AM"</item>-->
+        <!--<item>"7:30AM"</item>-->
+        <!--<item>"3:00PM"</item>-->
+        <!--<item>"5:00PM"</item>-->
+        <!--<item>"6:00PM"</item>-->
+        <!--<item>"7:30PM"</item>-->
+        <!--<item>"8:00PM"</item>-->
+        <!--<item>"8:30PM"</item>-->
+        <item>"সকাল ৫:৩০"</item>
+        <item>"সকাল ৬:০০"</item>
+        <item>"সকাল ৬:৪৫"</item>
+        <item>"সকাল ৭:০০"</item>
+        <item>"সকাল ৭:১৫"</item>
+        <item>"সকাল ৭:৩০"</item>
+        <item>"সকাল ৭:৪৫"</item>
+        <item>"সকাল ৯:৩০"</item>
+        <item>"সকাল ১০:০০"</item>
+        <item>"দুপুর ১:১৫"</item>
+        <item>"দুপুর ২:২০"</item>
+        <item>"দুপুর ২:৫০"</item>
+        <item>"দুপুর ৩:০০"</item>
+        <item>"বিকাল ৪:০০"</item>
+        <item>"বিকাল ৪:৪৫"</item>
+        <item>"বিকাল ৫:০০"</item>
+        <item>"সন্ধ্যা ৬:০০"</item>
+        <item>"সন্ধ্যা ৭:৩০"</item>
+        <item>"রাত ৮:০০"</item>
+        <item>"রাত ৮:৩০"</item>
+    </string-array>
+    <string-array name="busroute">
+        <item>"বঙ্গবাজার"</item>
+        <item>"মিরপুর"</item>
+        <item>"মিরপুর১২"</item>
+        <item>"মিরপুর১৪"</item>
+        <item>"শান্তিনগর"</item>
+        <item>"উত্তরা"</item>
+        <item>"জিগাতলা"</item>
+        <item>"আসাদগেট"</item>
+        <item>"গুলশান"</item>
+        <item>"মালিবাগ"</item>
+        <item>"মানিক মিয়া"</item>
+        <item>"অফিসার্স"</item>
+        <item>"অরুনাপল্লী"</item>
+        <item>"অ্যাম্বুলেন্স ১"</item>
+        <item>"অ্যাম্বুলেন্স ২"</item>
+        <item>"অ্যাম্বুলেন্স ৩"</item>
+        <!--<item>"BongoBazar"</item>-->
+        <!--<item>"Mirpur"</item>-->
+        <!--<item>"Uttora"</item>-->
+        <!--<item>"ManikMia"</item>-->
+        <!--<item>"Ambulance1"</item>-->
+        <!--<item>"Ambulance2"</item>-->
+        <!--<item>"Ambulance3"</item>-->
+        <!--<item>"ArunaPalli"</item>-->
+    </string-array>
 
 </resources>

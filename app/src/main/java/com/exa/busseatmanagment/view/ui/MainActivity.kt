@@ -3,12 +3,10 @@ package com.exa.busseatmanagment.view.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import androidx.recyclerview.widget.GridLayoutManager
-import com.exa.busseatmanagment.R
 import com.exa.busseatmanagment.databinding.ActivityMainBinding
-import com.exa.busseatmanagment.model.SeatModel
-import com.exa.busseatmanagment.model.User
+import com.exa.busseatmanagment.model.data_class.SeatModel
+import com.exa.busseatmanagment.model.data_class.User
 import com.exa.busseatmanagment.view.adapter.BusSeatAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -20,16 +18,17 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         val binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var user=User("Shahin Bashar","0163","dfjak","","","")
+        var user= User("Shahin Bashar","0163","dfjak","","","")
         Log.d("Shahin Bashar",user.toString())
         seatlist=ArrayList()
-        var a=SeatModel("Abc",true,true)
+        var a= SeatModel("Abc",true,true)
         seatlist.add(a)
         seatlist.add(a)
         seatlist.add(a)
         seatlist.add(a)
         seatlist.add(a)
         seatlist.add(a)
+
         seatlist.add(a)
         seatlist.add(a)
         seatlist.add(a)
