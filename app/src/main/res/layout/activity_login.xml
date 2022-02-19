@@ -1,101 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_height="match_parent"
-    tools:context=".view.ui.LoginActivity">
- <com.google.android.material.textfield.TextInputLayout
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     app:boxBackgroundMode="outline"
-     app:boxBackgroundColor="#41ECECEC"
-     android:background="@drawable/button_backgroun_radius"
-     style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
-     >
-     <com.google.android.material.textfield.TextInputEditText
-         android:layout_width="match_parent"
-         android:gravity="center"
-         android:layout_height="match_parent"
-         android:hint="Email"
-         android:inputType="textEmailAddress"
+    xmlns:tools="http://schemas.android.com/tools">
 
-         />
- </com.google.android.material.textfield.TextInputLayout>
- <com.google.android.material.textfield.TextInputLayout
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:layout_marginTop="5dp"
-     app:boxBackgroundMode="outline"
-     app:boxBackgroundColor="#41ECECEC"
-     android:background="@drawable/button_backgroun_radius"
-     style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
-     >
-     <com.google.android.material.textfield.TextInputEditText
-         android:layout_width="match_parent"
-         android:gravity="center"
-         android:layout_height="match_parent"
-         android:hint="Password"
-         android:inputType="textPassword"
+    <data>
+        <variable
+            name="model"
+            type="com.exa.busseatmanagment.viewmodel.LoginViewModel" />
 
-         />
- </com.google.android.material.textfield.TextInputLayout>
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:weightSum="2"
-       android:orientation="horizontal"
-       >
-       <Button
-           android:layout_width="0dp"
-           android:layout_weight="1"
-           android:layout_height="wrap_content"
-           android:text="Sign In"
-           android:onClick="SignIn"
-           android:layout_marginHorizontal="20dp"
-           />
-       <Button
-           android:layout_width="0dp"
-           android:layout_weight="1"
-           android:layout_height="wrap_content"
-           android:text="Sign up"
-           android:onClick="Registration"
-           android:layout_marginHorizontal="20dp"
-           />
+    </data>
 
-   </LinearLayout>
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:weightSum="2"-->
-<!--        android:gravity="center"-->
-<!--        android:orientation="horizontal"-->
-<!--        >-->
-<!--        <TextView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:gravity="center"-->
-<!--            android:text="Forgot Password?"-->
-<!--            />-->
-<!--        <TextView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_gravity="start"-->
-<!--            android:textColor="#311B92"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="Reset"-->
-<!--            />-->
-<!--    </LinearLayout>-->
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        tools:context=".view.ui.LoginActivity">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="#41ECECEC"
+            android:background="@drawable/button_backgroun_radius"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:hint="Email"
+                android:text="@{model.email}"
+                android:onTextChanged="@{model::onEmailChange}"
+                android:inputType="textEmailAddress"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="#41ECECEC"
+            android:background="@drawable/button_backgroun_radius"
+            style="@style/Widget.Material3.TextInputEditText.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:hint="Password"
+                android:onTextChanged="@{model::onPasswordChange}"
+                android:text="@{model.password}"
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Sign In"
+                android:onClick="@{model::makeLogin}"
+                android:layout_marginHorizontal="20dp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Sign up"
+                android:onClick="@{model::signUp}"
+                android:layout_marginHorizontal="20dp" />
+
+        </LinearLayout>
+        <!--    <LinearLayout-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:weightSum="2"-->
+        <!--        android:gravity="center"-->
+        <!--        android:orientation="horizontal"-->
+        <!--        >-->
+        <!--        <TextView-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:gravity="center"-->
+        <!--            android:text="Forgot Password?"-->
+        <!--            />-->
+        <!--        <TextView-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_gravity="start"-->
+        <!--            android:textColor="#311B92"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:text="Reset"-->
+        <!--            />-->
+        <!--    </LinearLayout>-->
+<!--        <com.facebook.login.widget.LoginButton-->
+<!--            android:id="@+id/login_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_marginBottom="30dp" />-->
+    </LinearLayout>
+</layout>
