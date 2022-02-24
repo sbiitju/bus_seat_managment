@@ -10,6 +10,5 @@ class SeatInfoShowImplement:SeatInfoShowModel {
     }
 
     override fun cancelSeat(seat: SeatModel) {
-
     }
 }

@@ -15,12 +15,12 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.profilel_making)
         supportActionBar?.hide()
         firebaseAuth= FirebaseAuth.getInstance()
-//        checkLogin()
+        checkLogin()
     }
 
     private fun checkLogin() {
-        if (firebaseAuth?.currentUser ==null){
-            startActivity(Intent(this,MainActivity::class.java))
+        if (firebaseAuth?.currentUser !=null){
+            startActivity(Intent(this,SelectBusActivity::class.java))
             finish()
         }
         else{

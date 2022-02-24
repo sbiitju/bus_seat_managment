@@ -101,5 +101,6 @@
         <!--<item>"Ambulance3"</item>-->
         <!--<item>"ArunaPalli"</item>-->
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

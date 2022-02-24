@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -30,19 +31,21 @@ class LoginActivity : AppCompatActivity(),CommonListener {
     lateinit var viewModel: LoginViewModel
     var auth:FirebaseAuth= FirebaseAuth.getInstance()
     lateinit var progressBar: ProgressBar
+    var binding: ActivityLoginBinding? =null
     private lateinit var callbackManager:CallbackManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding=ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding= ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
+
         supportActionBar?.hide()
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create()
         viewModel= ViewModelProvider(this)[LoginViewModel::class.java]
-        binding.model=viewModel
+        binding!!.model=viewModel
         viewModel.commonListener=this
-
     }
+
 
 //    private fun checkLogin() {
 //        if(auth.currentUser!=null){

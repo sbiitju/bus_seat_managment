@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
-    android:id="@+id/chair"
-    android:icon="@drawable/ic_baseline_menu_open_24"
+    android:id="@+id/logout"
     android:visible="true"
-    />
+    android:title="Log Out" />
 </menu>
