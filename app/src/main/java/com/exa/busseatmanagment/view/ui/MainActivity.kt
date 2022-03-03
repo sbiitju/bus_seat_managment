@@ -9,6 +9,8 @@ import com.exa.busseatmanagment.databinding.ActivityMainBinding
 import com.exa.busseatmanagment.model.data_class.SeatModel
 import com.exa.busseatmanagment.model.data_class.User
 import com.exa.busseatmanagment.view.adapter.BusSeatAdapter
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
     lateinit var seatlist:ArrayList<SeatModel>
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         val binding=ActivityMainBinding.inflate(layoutInflater)
         val arg=intent.getStringExtra("reference")
         setContentView(binding.root)
+        var databaseReference= arg?.let { FirebaseDatabase.getInstance().getReference(it) }
+
         var user= User("Shahin Bashar","0163","dfjak","","","")
         Log.d("Shahin Bashar",user.toString())
         seatlist=ArrayList()
@@ -67,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         seatlist.add(bb)
         seatlist.add(30,c)
         seatlist.add(0,bb)
+            databaseReference?.setValue(seatlist)
         var b:BusSeatAdapter=BusSeatAdapter(this,seatlist,arg)
         binding.recyclerview.layoutManager=GridLayoutManager(this,2)
         binding.recyclerview2.layoutManager=GridLayoutManager(this,2)
