@@ -21,6 +21,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityMaps2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -41,8 +42,10 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
+        val sydney = LatLng(23.8796, 90.2726)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16f))
+        mMap.uiSettings.isMapToolbarEnabled=true
+        mMap.uiSettings.isZoomControlsEnabled=true
     }
 }
