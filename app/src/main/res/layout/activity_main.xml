@@ -80,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
+        android:weightSum="1"
         >
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
@@ -88,13 +88,6 @@
             android:layout_marginRight="18dp"
             android:layout_height="match_parent"
             android:id="@+id/recyclerview"
-            />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="18dp"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerview2"
             />
     </LinearLayout>
 

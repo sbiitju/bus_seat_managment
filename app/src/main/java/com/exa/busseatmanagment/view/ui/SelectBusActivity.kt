@@ -20,11 +20,16 @@ import com.exa.busseatmanagment.utill.Utility.showToast
 import com.exa.busseatmanagment.viewmodel.LoginViewModel
 import com.exa.busseatmanagment.viewmodel.SelectBusViewModel
 import com.facebook.CallbackManager
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SelectBusActivity : AppCompatActivity(),CommonListener{
     lateinit var viewModel: SelectBusViewModel
@@ -36,6 +41,89 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         seatlist= ArrayList()
+        var seatModel=SeatModel("Abc","0","Available",resources.getColor(R.color.white))
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
+        seatlist.add(seatModel)
         binding= ActivitySelectBusActivityBinding.inflate(layoutInflater)
         viewModel= ViewModelProvider(this)[SelectBusViewModel::class.java]
         setContentView(binding!!.root)
@@ -60,27 +148,37 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
     }
 
     override fun onSuccess(msg: String) {
-        var databaseReference= msg?.let { FirebaseDatabase.getInstance().getReference(it) }
-        databaseReference.addValueEventListener(object: ValueEventListener{
+        val sdf = SimpleDateFormat("dd-M-yyyy")
+        val currentDate = sdf.format(Date())
+        var ref=msg+currentDate
+        var databaseReference= ref?.let { FirebaseDatabase.getInstance().getReference(it) }
+        databaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if(snapshot.exists()){
                     var intent=Intent(this@SelectBusActivity,MainActivity::class.java)
-                    intent.putExtra("reference",msg)
+                    intent.putExtra("reference",ref)
+//                    intent.putExtra("list",seatlist)
                     startActivity(intent)
-                    Toast.makeText(this@SelectBusActivity,"Data Found",Toast.LENGTH_LONG).show()
-                    snapshot.children.forEach {
-                    }
                 }else{
-                    Toast.makeText(this@SelectBusActivity,"No Data Found",Toast.LENGTH_LONG).show()
+                    databaseReference.setValue(seatlist).addOnCompleteListener(OnCompleteListener {
+                        if(it.isSuccessful){
+                            var intent=Intent(this@SelectBusActivity,MainActivity::class.java)
+                            intent.putExtra("reference",ref)
+//                    intent.putExtra("list",seatlist)
+                            startActivity(intent)
+                        }else{
+                            Toast.makeText(this@SelectBusActivity,"Failed",Toast.LENGTH_LONG)
+                        }
+                    })
                 }
-
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("Failed",error.toString())
+                TODO("Not yet implemented")
             }
 
         })
+
 
     }
 
@@ -89,7 +187,7 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
     }
 
     override fun onNavigate() {
-        startActivity(Intent(this,MapsActivity::class.java))
+        startActivity(Intent(this,MapsActivity2::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
