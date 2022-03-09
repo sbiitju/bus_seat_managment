@@ -43,7 +43,17 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(23.8796, 90.2726)
+        val sydney1 = LatLng(23.8474, 90.2575)
+        val sydney2 = LatLng(23.8396, 90.2326)
+        val sydney3 = LatLng(23.8596, 90.2426)
+        val sydney4 = LatLng(23.8796, 90.2726)
+        val sydney5 = LatLng(23.8796, 90.2726)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.addMarker(MarkerOptions().position(sydney1).title("Marker in Sydney"))
+        mMap.addMarker(MarkerOptions().position(sydney2).title("Marker in Sydney"))
+        mMap.addMarker(MarkerOptions().position(sydney3).title("Marker in Sydney"))
+        mMap.addMarker(MarkerOptions().position(sydney4).title("Marker in Sydney"))
+        mMap.addMarker(MarkerOptions().position(sydney5).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16f))
         mMap.uiSettings.isMapToolbarEnabled=true
         mMap.uiSettings.isZoomControlsEnabled=true
