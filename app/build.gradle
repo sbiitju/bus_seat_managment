@@ -63,9 +63,9 @@ dependencies {
     kapt 'com.google.dagger:hilt-android-compiler:2.38.1'
 
     /** RecyclerView Dependency added here **/
-        implementation("androidx.recyclerview:recyclerview:1.2.1")
-        // For control over item selection of both touch and mouse driven selection
-        implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    // For control over item selection of both touch and mouse driven selection
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
 
     /** Card View decpendecy*/
     implementation("androidx.cardview:cardview:1.0.0")
@@ -83,8 +83,7 @@ dependencies {
     /*** Coroutines dependecy
      *
      */
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0"
-    )
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
 }
 // Allow references to generated code

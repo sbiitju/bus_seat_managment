@@ -207,4 +207,9 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        
+    }
+
 }

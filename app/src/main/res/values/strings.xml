@@ -40,24 +40,52 @@
     <string-array name="fromto">
         <item>"ক্যাম্পাস হতে"</item>
         <item>"ঢাকা হতে"</item>
-        <!--<item>From Campus</item>-->
-        <!--<item>From Dhaka</item>-->
     </string-array>
     <string-array name="fromtobangla">
         <item>"ক্যাম্পাস হতে"</item>
         <item>"ঢাকা হতে"</item>
     </string-array>
+    <string-array name="departmentName">
+        <item>IIT</item>
+        <item>IBA</item>
+        <item>Archaeology</item>
+        <item>Bangla</item>
+        <item>English</item>
+        <item>Drama and Dramatics</item>
+        <item>Fine Arts</item>
+        <item>History</item>
+        <item>International Relations</item>
+        <item>Journalism and Media Studies</item>
+        <item>Philosophy</item>
+        <item>Botany</item>
+        <item>Biochemistry and Molecular Biology</item>
+        <item>Biotechnology and Genetic Engineering</item>
+        <item>Microbiology</item>
+        <item>Pharmacy</item>
+        <item>Public Health and Informatics</item>
+        <item>Zoology</item>
+        <item>Accounting and Information Systems</item>
+        <item>Finance and Banking</item>
+        <item>Marketing</item>
+        <item>Management Studies</item>
+        <item>Law and Justice</item>
+        <item>Chemistry</item>
+        <item>CSE</item>
+        <item>Environmental Sciences</item>
+        <item>Geological Sciences</item>
+        <item>Mathematics</item>
+        <item>Physics</item>
+        <item>Statistics</item>
+        <item>Anthropology</item>
+        <item>Economics</item>
+        <item>Geography and Environment</item>
+        <item>Government and Politics</item>
+        <item>Public Administration</item>
+        <item>Urban and Regional Planning</item>
+        <item>Bangabandhu Institute of Comparative Literature and Culture</item>
+        <item>Institute of Remote Sensing</item>
+    </string-array>
     <string-array name="time">
-        <!--<item>"6:00AM"</item>-->
-        <!--<item>"7:00AM"</item>-->
-        <!--<item>"7:15AM"</item>-->
-        <!--<item>"7:30AM"</item>-->
-        <!--<item>"3:00PM"</item>-->
-        <!--<item>"5:00PM"</item>-->
-        <!--<item>"6:00PM"</item>-->
-        <!--<item>"7:30PM"</item>-->
-        <!--<item>"8:00PM"</item>-->
-        <!--<item>"8:30PM"</item>-->
         <item>"সকাল ৫:৩০"</item>
         <item>"সকাল ৬:০০"</item>
         <item>"সকাল ৬:৪৫"</item>

@@ -4,15 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.exa.busseatmanagment.R
 //import com.exa.busseatmanagment.R.id.facebookBtn
 import com.exa.busseatmanagment.databinding.ActivityLoginBinding
+import com.exa.busseatmanagment.model.TeacherModel
 import com.exa.busseatmanagment.utill.CommonListener
 import com.exa.busseatmanagment.utill.Utility
 import com.exa.busseatmanagment.utill.Utility.makeLog
@@ -26,6 +27,7 @@ import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 
 class LoginActivity : AppCompatActivity(),CommonListener {
     lateinit var viewModel: LoginViewModel
@@ -106,7 +108,76 @@ class LoginActivity : AppCompatActivity(),CommonListener {
 
 
     override fun onSuccess(msg: String) {
-        this.showToast("Success")
+        if(msg.contains("dialog")){
+            var alertDialog=AlertDialog.Builder(this)
+            var view=LayoutInflater.from(this).inflate(R.layout.check,null)
+            var studentBtn=view.findViewById<Button>(R.id.student)
+            var teacherBtn=view.findViewById<Button>(R.id.teacher)
+            var stuffBtn=view.findViewById<Button>(R.id.stuff)
+            studentBtn.setOnClickListener {
+                var departmentName=resources.getStringArray(R.array.departmentName)
+                var adapter=ArrayAdapter(this@LoginActivity,android.R.layout.simple_expandable_list_item_1,departmentName)
+                var studentDialog=AlertDialog.Builder(this)
+                var view=LayoutInflater.from(this).inflate(R.layout.profilel_making,null)
+                var departementET=view.findViewById<AutoCompleteTextView>(R.id.sDepartment)
+                var name=view.findViewById<EditText>(R.id.sName)
+                var number=view.findViewById<EditText>(R.id.sMobileNumber)
+                var regNumber=view.findViewById<EditText>(R.id.sRegNumber)
+                var email=view.findViewById<EditText>(R.id.sEmail)
+                var password=view.findViewById<EditText>(R.id.sPassword)
+                var classRoll=view.findViewById<EditText>(R.id.sClassRoll)
+                var examRoll=view.findViewById<EditText>(R.id.sExamRoll)
+                var sName=name.text.toString()
+                var sNumber=number.text.toString()
+                var sEmail=email.text.toString()
+                var sRegNumber=regNumber.text.toString()
+                var sPassword=password.text.toString()
+                var sClassroll=classRoll.text.toString()
+                var sExamRoll=examRoll.text.toString()
+                var sDepartment=departementET.text.toString()
+                departementET.setAdapter(adapter)
+                studentDialog.setView(view).setCancelable(true).show()
+            }
+            teacherBtn.setOnClickListener {
+                var departmentName=resources.getStringArray(R.array.departmentName)
+                var adapter=ArrayAdapter(this@LoginActivity,android.R.layout.simple_expandable_list_item_1,departmentName)
+                var teacherDialog=AlertDialog.Builder(this)
+                var view=LayoutInflater.from(this).inflate(R.layout.tcrprofilemaking,null)
+                var tName=view.findViewById<EditText>(R.id.tName)
+                var tDepartment=view.findViewById<AutoCompleteTextView>(R.id.tDepartment)
+                tDepartment.setAdapter(adapter)
+                var tMobileNumber=view.findViewById<EditText>(R.id.tMobileNumber)
+                var tEmail=view.findViewById<EditText>(R.id.tEmail)
+                var tPassword=view.findViewById<EditText>(R.id.tPasword)
+                var tSubmitBtn=view.findViewById<Button>(R.id.tSubmit)
+                tSubmitBtn.setOnClickListener {
+                    var name=tName.text.toString()
+                    var department=tDepartment.text.toString()
+                    var mobileNumber=tMobileNumber.text.toString()
+                    var email=tEmail.text.toString()
+                    var password=tPassword.text.toString()
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener{
+                        if(it.isSuccessful){
+                            var refurence=FirebaseDatabase.getInstance().getReference(mobileNumber)
+                            var teacherInfo=TeacherModel(name,email,mobileNumber,department)
+                            refurence.setValue(teacherInfo).addOnCompleteListener{
+                                if(it.isSuccessful){
+                                    startActivity(Intent(this@LoginActivity,SelectBusActivity::class.java))
+                                    finish()
+                                }
+                            }
+                        }
+                    }
+                }
+                teacherDialog.setView(view).setCancelable(true).show()
+            }
+            stuffBtn.setOnClickListener {
+                var stuffDialog =AlertDialog.Builder(this)
+                var view=LayoutInflater.from(this).inflate(R.layout.stfprofilemkng,null)
+                stuffDialog.setView(view).setCancelable(true).show()
+            }
+            alertDialog.setView(view).show()
+        }
         Log.d("Check",msg)
     }
 

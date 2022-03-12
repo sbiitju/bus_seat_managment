@@ -66,7 +66,7 @@ class BusSeatAdapter(var context: Context, var seatList: List<SeatModel>, arg: S
                 databaseReference1.addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if(snapshot.exists()){
-                            Toast.makeText(context,"Try another seat",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context,snapshot.getValue<User>()?.name+" Taken the seat",Toast.LENGTH_SHORT).show()
                         }
                     }
 

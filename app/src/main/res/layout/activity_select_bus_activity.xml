@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:padding="10dp"
         android:gravity="center"
-        android:background="#efefef"
+        android:background="#5E7CB342"
         tools:context=".view.ui.SelectBusActivity">
 
         <TextView
@@ -31,6 +31,7 @@
             android:gravity="center" />
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:background="@color/red"
             android:layout_marginHorizontal="20dp"
             android:hint="বাস ছাড়ার স্থান নির্ধারন করুন"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -55,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
             android:hint="বাসের টাইপ নির্ধারন করুণ"
+            android:background="@color/red"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="1dp"
@@ -76,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
             android:hint="সময় নির্ধারন করুন"
+            android:background="@color/red"
             android:layout_marginVertical="5dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_height="wrap_content"
@@ -98,6 +101,7 @@
             android:layout_width="match_parent"
             android:layout_marginHorizontal="20dp"
             android:hint="রুট নির্ধারন করুন"
+            android:background="@color/red"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="1dp"
@@ -119,35 +123,38 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:weightSum="2"
     android:layout_marginHorizontal="20dp"
     >
     <Button
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
+        android:backgroundTint="#5600ACC1"
         android:layout_weight="1"
         android:layout_marginVertical="5dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:paddingHorizontal="40dp"
-        android:text="খুজুন"
+        android:text="আসন দেখুন"
         android:onClick="@{model::selectBus}"
         android:textColor="#050C33"
         android:textSize="20dp"
         app:icon="@drawable/ic_baseline_event_seat_24" />
+
     <Button
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_marginVertical="5dp"
-        android:layout_height="match_parent"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
         android:layout_gravity="center"
+        android:backgroundTint="#5600ACC1"
+        android:layout_marginVertical="5dp"
         android:layout_marginTop="30dp"
-        android:paddingHorizontal="40dp"
-        android:text="খুজুন"
+        android:layout_weight="1"
         android:onClick="@{model::findBus}"
+        android:paddingHorizontal="40dp"
+        android:text="বাসের লোকেশন দেখুন"
         android:textColor="#050C33"
         android:textSize="20dp"
         app:icon="@drawable/ic_baseline_directions_bus_24" />
