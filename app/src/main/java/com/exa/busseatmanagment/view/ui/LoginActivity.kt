@@ -13,6 +13,7 @@ import androidx.lifecycle.get
 import com.exa.busseatmanagment.R
 //import com.exa.busseatmanagment.R.id.facebookBtn
 import com.exa.busseatmanagment.databinding.ActivityLoginBinding
+import com.exa.busseatmanagment.model.StudentModel
 import com.exa.busseatmanagment.model.TeacherModel
 import com.exa.busseatmanagment.utill.CommonListener
 import com.exa.busseatmanagment.utill.Utility
@@ -135,6 +136,12 @@ class LoginActivity : AppCompatActivity(),CommonListener {
                 var sClassroll=classRoll.text.toString()
                 var sExamRoll=examRoll.text.toString()
                 var sDepartment=departementET.text.toString()
+                var studentModel=StudentModel(sName,sNumber,sDepartment,sEmail,sRegNumber,sClassroll,sExamRoll)
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(sEmail,sPassword).addOnCompleteListener {
+                    if(it.isSuccessful){
+
+                    }
+                }
                 departementET.setAdapter(adapter)
                 studentDialog.setView(view).setCancelable(true).show()
             }

@@ -54,13 +54,14 @@
             app:boxBackgroundMode="outline"
             android:padding="10dp"
             app:boxBackgroundColor="#ececec"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:background="@drawable/button_backgroun_radius"
             android:layout_marginHorizontal="20dp"
-            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
             >
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:gravity="center"
+                android:inputType="none"
                 android:layout_height="match_parent"
                 android:hint="Department"
                 android:id="@+id/tDepartment"
