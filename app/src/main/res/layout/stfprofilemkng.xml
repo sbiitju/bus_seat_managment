@@ -53,16 +53,16 @@
             app:boxBackgroundMode="outline"
             android:padding="10dp"
             app:boxBackgroundColor="#ececec"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:background="@drawable/button_backgroun_radius"
             android:layout_marginHorizontal="20dp"
-            style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
             >
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="match_parent"
                 android:hint="Working Department"
-                android:inputType="textEmailAddress"
+                android:inputType="none"
                 android:id="@+id/stuffDepartment"
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -122,7 +122,7 @@
                 android:gravity="center"
                 android:layout_height="match_parent"
                 android:hint="Password"
-                android:inputType="textPassword"
+                android:inputType="number"
                 android:id="@+id/stuffPassword"
                 />
         </com.google.android.material.textfield.TextInputLayout>

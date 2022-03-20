@@ -2,6 +2,7 @@ package com.exa.busseatmanagment.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import com.exa.busseatmanagment.R
 import com.exa.busseatmanagment.databinding.ActivityMapsBinding
 
@@ -44,5 +45,12 @@ private lateinit var binding: ActivityMapsBinding
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        outState.run {
+            putString("Test","Test")
+        }
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 }

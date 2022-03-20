@@ -21,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxBackgroundMode="outline"
-            android:padding="10dp"
             app:boxBackgroundColor="#41ECECEC"
             android:background="@drawable/button_backgroun_radius"
             style="@style/Widget.Material3.TextInputEditText.OutlinedBox">
@@ -31,8 +30,6 @@
                 android:gravity="center"
                 android:layout_height="match_parent"
                 android:hint="Email"
-                android:layout_gravity="center"
-                android:padding="10dp"
                 android:text="@{model.email}"
                 android:onTextChanged="@{model::onEmailChange}"
                 android:inputType="textEmailAddress"
@@ -45,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             app:boxBackgroundMode="outline"
-            android:padding="10dp"
+            android:hint="Password Length Must be 8"
             app:boxBackgroundColor="#41ECECEC"
             android:background="@drawable/button_backgroun_radius"
             style="@style/Widget.Material3.TextInputEditText.OutlinedBox">
@@ -54,30 +51,35 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="match_parent"
-                android:hint="Password"
-                android:padding="10dp"
                 android:onTextChanged="@{model::onPasswordChange}"
                 android:text="@{model.password}"
                 android:inputType="textPassword"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Sign In"
                 android:onClick="@{model::makeLogin}"
                 android:layout_marginHorizontal="20dp" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Create a New Account"
-                android:textAllCaps="false"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:text="Sign up"
                 android:onClick="@{model::signUp}"
                 android:layout_marginHorizontal="20dp" />
+
+        </LinearLayout>
         <!--    <LinearLayout-->
         <!--        android:layout_width="match_parent"-->
         <!--        android:layout_height="wrap_content"-->
@@ -102,12 +104,12 @@
         <!--            android:text="Reset"-->
         <!--            />-->
         <!--    </LinearLayout>-->
-        <!--        <com.facebook.login.widget.LoginButton-->
-        <!--            android:id="@+id/login_button"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_gravity="center_horizontal"-->
-        <!--            android:layout_marginTop="30dp"-->
-        <!--            android:layout_marginBottom="30dp" />-->
+<!--        <com.facebook.login.widget.LoginButton-->
+<!--            android:id="@+id/login_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_marginBottom="30dp" />-->
     </LinearLayout>
 </layout>

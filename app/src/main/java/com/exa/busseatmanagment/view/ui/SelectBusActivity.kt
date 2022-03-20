@@ -159,6 +159,7 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
                     intent.putExtra("reference",ref)
 //                    intent.putExtra("list",seatlist)
                     startActivity(intent)
+                    finish()
                 }else{
                     databaseReference.setValue(seatlist).addOnCompleteListener(OnCompleteListener {
                         if(it.isSuccessful){
@@ -166,6 +167,7 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
                             intent.putExtra("reference",ref)
 //                    intent.putExtra("list",seatlist)
                             startActivity(intent)
+                            finish()
                         }else{
                             Toast.makeText(this@SelectBusActivity,"Failed",Toast.LENGTH_LONG)
                         }

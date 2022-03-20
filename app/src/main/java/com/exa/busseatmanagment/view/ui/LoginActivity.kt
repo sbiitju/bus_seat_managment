@@ -139,7 +139,23 @@ class LoginActivity : AppCompatActivity(),CommonListener {
                 var studentModel=StudentModel(sName,sNumber,sDepartment,sEmail,sRegNumber,sClassroll,sExamRoll)
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(sEmail,sPassword).addOnCompleteListener {
                     if(it.isSuccessful){
-
+                        var student=TeacherModel(sName,sEmail,sNumber,sDepartment)
+                        var studentModel=StudentModel(sName,sNumber,sDepartment,sEmail,sRegNumber,sClassroll,sExamRoll)
+                        FirebaseDatabase.getInstance().getReference(sNumber).setValue(studentModel)
+                        var reference=
+                            auth.currentUser?.let { it1 ->
+                                FirebaseDatabase.getInstance().getReference(
+                                    it1.uid)
+                            }
+                        reference?.setValue(student)?.addOnCompleteListener {
+                            if(it.isSuccessful){
+                                startActivity(Intent(this@LoginActivity,SelectBusActivity::class.java))
+                                finish()
+                            }
+                            else{
+                                Toast.makeText(this@LoginActivity,"Failed",Toast.LENGTH_LONG).show()
+                            }
+                        }
                     }
                 }
                 departementET.setAdapter(adapter)
@@ -165,12 +181,19 @@ class LoginActivity : AppCompatActivity(),CommonListener {
                     var password=tPassword.text.toString()
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener{
                         if(it.isSuccessful){
-                            var refurence=FirebaseDatabase.getInstance().getReference(mobileNumber)
+                            var refurence=
+                                auth.currentUser?.let { it1 ->
+                                    FirebaseDatabase.getInstance().getReference(
+                                        it1.uid)
+                                }
                             var teacherInfo=TeacherModel(name,email,mobileNumber,department)
-                            refurence.setValue(teacherInfo).addOnCompleteListener{
+                            refurence?.setValue(teacherInfo)?.addOnCompleteListener{
                                 if(it.isSuccessful){
                                     startActivity(Intent(this@LoginActivity,SelectBusActivity::class.java))
                                     finish()
+                                }
+                                else{
+                                    Toast.makeText(this@LoginActivity,"Failed",Toast.LENGTH_LONG).show()
                                 }
                             }
                         }
@@ -181,11 +204,45 @@ class LoginActivity : AppCompatActivity(),CommonListener {
             stuffBtn.setOnClickListener {
                 var stuffDialog =AlertDialog.Builder(this)
                 var view=LayoutInflater.from(this).inflate(R.layout.stfprofilemkng,null)
+                var departmentName=resources.getStringArray(R.array.stuffDepartemnt)
+                var adapter=ArrayAdapter(this@LoginActivity,android.R.layout.simple_expandable_list_item_1,departmentName)
+                var stName=view.findViewById<EditText>(R.id.stuffName)
+                var stDepartment=view.findViewById<AutoCompleteTextView>(R.id.stuffDepartment)
+                stDepartment.setAdapter(adapter)
+                var stmobile=view.findViewById<EditText>(R.id.stuffMobile)
+                var stemail=view.findViewById<EditText>(R.id.stuffEmail)
+                var stPassword=view.findViewById<EditText>(R.id.stuffPassword)
+                var stButton=view.findViewById<Button>(R.id.stuffSubmit)
+                stButton.setOnClickListener {
+                    var name=stName.text.toString()
+                    var department=stDepartment.text.toString()
+                    var mobileNumber=stmobile.text.toString()
+                    var email=stemail.text.toString()
+                    var password=stPassword.text.toString()
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener{
+                        if(it.isSuccessful){
+                            var refurence=
+                                auth.currentUser?.let { it1 ->
+                                    FirebaseDatabase.getInstance().getReference(
+                                        it1.uid)
+                                }
+                            var teacherInfo=TeacherModel(name,email,mobileNumber,department)
+                            refurence?.setValue(teacherInfo)?.addOnCompleteListener{
+                                if(it.isSuccessful){
+                                    startActivity(Intent(this@LoginActivity,SelectBusActivity::class.java))
+                                    finish()
+                                }
+                                else{
+                                    Toast.makeText(this@LoginActivity,"Failed",Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        }
+                    }
+                }
                 stuffDialog.setView(view).setCancelable(true).show()
             }
             alertDialog.setView(view).show()
         }
-        Log.d("Check",msg)
     }
 
     override fun onFailed(msg: String) {
