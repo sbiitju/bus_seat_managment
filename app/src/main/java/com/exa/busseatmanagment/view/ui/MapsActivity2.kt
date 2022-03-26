@@ -18,8 +18,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMaps2Binding.inflate(layoutInflater)
+        setContentView(R.layout.activity_maps2)
         setContentView(binding.root)
         supportActionBar?.hide()
 

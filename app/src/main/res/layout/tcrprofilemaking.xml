@@ -112,6 +112,7 @@
             android:layout_marginTop="5dp"
             app:boxBackgroundMode="outline"
             android:padding="10dp"
+            android:hint="Password Length Must be 8"
             app:boxBackgroundColor="#ececec"
             android:background="@drawable/button_backgroun_radius"
             android:layout_marginHorizontal="20dp"
@@ -121,7 +122,6 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="match_parent"
-                android:hint="Password"
                 android:inputType="textPassword"
                 android:id="@+id/tPasword"
                 />

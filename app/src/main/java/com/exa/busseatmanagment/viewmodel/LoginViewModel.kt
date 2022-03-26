@@ -1,20 +1,11 @@
 package com.exa.busseatmanagment.viewmodel
 
-import android.app.AlertDialog
-import android.app.Application
-import android.content.Intent
-import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat.startActivity
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.exa.busseatmanagment.utill.CommonListener
-import com.exa.busseatmanagment.utill.Utility
-import com.exa.busseatmanagment.view.ui.MainActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import kotlin.coroutines.coroutineContext
 
 class LoginViewModel : ViewModel() {
     var email = MutableLiveData<String>()
@@ -27,7 +18,6 @@ class LoginViewModel : ViewModel() {
 
     fun onTestChange(char: CharSequence, start: Int, end: Int, count: Int) {
         test.postValue(char.toString())
-        Log.d("ShahinBashar", char.toString())
     }
 
     fun onPasswordChange(char: CharSequence, start: Int, end: Int, count: Int) {
@@ -47,8 +37,8 @@ class LoginViewModel : ViewModel() {
                 OnCompleteListener {
                     if (it.isSuccessful) {
 
-                        commonListener?.onSuccess("Success")
-                        commonListener?.onNavigate()
+                        commonListener?.onSuccess("Success",1)
+                        commonListener?.onNavigate("")
                     } else commonListener?.onFailed("Failed")
                 })
         }
@@ -56,7 +46,7 @@ class LoginViewModel : ViewModel() {
     }
 
     fun signUp(view: View) {
-        commonListener?.onSuccess("dialog")
+        commonListener?.onSuccess("dialog",1)
 //        Log.d("check", email.value.toString())
 //        if (email.value.isNullOrEmpty() || password.value.isNullOrEmpty()) {
 //            commonListener?.onFailed("Failed")

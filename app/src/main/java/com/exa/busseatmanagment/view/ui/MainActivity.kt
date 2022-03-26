@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var seatlist:ArrayList<SeatModel>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Shahin Bashar","On create")
         var progressDialog=ProgressDialog(this)
         progressDialog.setTitle("Getting Data...")
         progressDialog.setCancelable(false)
@@ -32,13 +31,15 @@ class MainActivity : AppCompatActivity() {
         seatlist=ArrayList()
         var arg=intent.getStringExtra("reference")
         var databaseReference1= arg?.let { FirebaseDatabase.getInstance().getReference(it) }
-        databaseReference1?.addValueEventListener(object: ValueEventListener {
+        databaseReference1?.child("seat")?.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     seatlist= snapshot.getValue<ArrayList<SeatModel>>()!!
                     Log.d("Check",seatlist.toString())
 
-                    var b:BusSeatAdapter=BusSeatAdapter(this@MainActivity,seatlist,arg)
+                    var b=BusSeatAdapter(this@MainActivity,seatlist,arg) {
+                        Log.d("Check",it)
+                    }
                     binding.recyclerview.layoutManager=GridLayoutManager(this@MainActivity,4)
                     binding.recyclerview.adapter=b
                     progressDialog.hide()
@@ -54,7 +55,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-        Log.d("Shahin Bashar",seatlist.toString())
 
     }
 

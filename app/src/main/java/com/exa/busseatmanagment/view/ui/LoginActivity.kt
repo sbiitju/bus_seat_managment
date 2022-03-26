@@ -5,29 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.exa.busseatmanagment.R
 //import com.exa.busseatmanagment.R.id.facebookBtn
 import com.exa.busseatmanagment.databinding.ActivityLoginBinding
 import com.exa.busseatmanagment.model.StudentModel
 import com.exa.busseatmanagment.model.TeacherModel
 import com.exa.busseatmanagment.utill.CommonListener
-import com.exa.busseatmanagment.utill.Utility
-import com.exa.busseatmanagment.utill.Utility.makeLog
 import com.exa.busseatmanagment.utill.Utility.showToast
 import com.exa.busseatmanagment.viewmodel.LoginViewModel
-import com.facebook.AccessToken
 import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 
 class LoginActivity : AppCompatActivity(),CommonListener {
@@ -40,7 +30,6 @@ class LoginActivity : AppCompatActivity(),CommonListener {
         super.onCreate(savedInstanceState)
         binding= ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
-
         supportActionBar?.hide()
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create()
@@ -49,66 +38,7 @@ class LoginActivity : AppCompatActivity(),CommonListener {
         viewModel.commonListener=this
     }
 
-
-//    private fun checkLogin() {
-//        if(auth.currentUser!=null){
-//            Toast.makeText(this,"Make Login First",Toast.LENGTH_LONG)
-//        }else{
-//            updateUI(null)
-//        }
-//    }
-
-//    override fun onClick(v: View?) {
-//        when(v?.id){
-//            facebookBtn->{
-//                if(viewModelProvider.login("sbiitju@gmail.com","12345678")){
-//                    Log.d("Shahin Bashar","Success")
-//                }else{
-//                    Log.d("Failed","Login Failed")
-//                }
-//            }
-//            R.id.login_button->{
-//
-//            }
-//            else->{
-//
-//            }
-//
-//        }
-//    }
-//    private fun handleFacebookAccessToken(token: AccessToken) {
-//        Log.d("TOken", "handleFacebookAccessToken:$token")
-//
-//        val credential = FacebookAuthProvider.getCredential(token.token)
-//        auth.signInWithCredential(credential)
-//            .addOnCompleteListener(this) { task ->
-//                if (task.isSuccessful) {
-//                    // Sign in success, update UI with the signed-in user's information
-//                    Log.d("Sign in success", "signInWithCredential:success")
-//                    val user = auth.currentUser
-//                    updateUI(user)
-//                } else {
-//                    // If sign in fails, display a message to the user.
-//                    Log.w("Failure", "signInWithCredential:failure", task.exception)
-//                    Toast.makeText(baseContext, "Authentication failed.",
-//                        Toast.LENGTH_SHORT).show()
-//                    updateUI(null)
-//                }
-//            }
-//    }
-
-//    private fun updateUI(user: FirebaseUser?) {
-//        if(user!=null){
-//            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
-//            finish()
-//        }else{
-//            Toast.makeText(this,"Failed",Toast.LENGTH_LONG)
-//        }
-//
-//    }
-
-
-    override fun onSuccess(msg: String) {
+    override fun onSuccess(msg: String,value: Int) {
         if(msg.contains("dialog")){
             var alertDialog=AlertDialog.Builder(this)
             var view=LayoutInflater.from(this).inflate(R.layout.check,null)
@@ -128,36 +58,40 @@ class LoginActivity : AppCompatActivity(),CommonListener {
                 var password=view.findViewById<EditText>(R.id.sPassword)
                 var classRoll=view.findViewById<EditText>(R.id.sClassRoll)
                 var examRoll=view.findViewById<EditText>(R.id.sExamRoll)
-                var sName=name.text.toString()
-                var sNumber=number.text.toString()
-                var sEmail=email.text.toString()
-                var sRegNumber=regNumber.text.toString()
-                var sPassword=password.text.toString()
-                var sClassroll=classRoll.text.toString()
-                var sExamRoll=examRoll.text.toString()
-                var sDepartment=departementET.text.toString()
-                var studentModel=StudentModel(sName,sNumber,sDepartment,sEmail,sRegNumber,sClassroll,sExamRoll)
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(sEmail,sPassword).addOnCompleteListener {
-                    if(it.isSuccessful){
-                        var student=TeacherModel(sName,sEmail,sNumber,sDepartment)
-                        var studentModel=StudentModel(sName,sNumber,sDepartment,sEmail,sRegNumber,sClassroll,sExamRoll)
-                        FirebaseDatabase.getInstance().getReference(sNumber).setValue(studentModel)
-                        var reference=
-                            auth.currentUser?.let { it1 ->
-                                FirebaseDatabase.getInstance().getReference(
-                                    it1.uid)
-                            }
-                        reference?.setValue(student)?.addOnCompleteListener {
-                            if(it.isSuccessful){
-                                startActivity(Intent(this@LoginActivity,SelectBusActivity::class.java))
-                                finish()
-                            }
-                            else{
-                                Toast.makeText(this@LoginActivity,"Failed",Toast.LENGTH_LONG).show()
+                var submit=view.findViewById<Button>(R.id.sSubmit)
+                submit.setOnClickListener {
+                    var sName=name.text.toString()
+                    var sNumber=number.text.toString()
+                    var sEmail=email.text.toString()
+                    var sRegNumber=regNumber.text.toString()
+                    var sPassword=password.text.toString()
+                    var sClassroll=classRoll.text.toString()
+                    var sExamRoll=examRoll.text.toString()
+                    var sDepartment=departementET.text.toString()
+                    var studentModel=StudentModel(sName,sNumber,sDepartment,sEmail,sRegNumber,sClassroll,sExamRoll)
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(sEmail,sPassword).addOnCompleteListener {
+                        if(it.isSuccessful){
+                            var student=TeacherModel(sName,sEmail,sNumber,sDepartment)
+                            var studentModel=StudentModel(sName,sNumber,sDepartment,sEmail,sRegNumber,sClassroll,sExamRoll)
+                            FirebaseDatabase.getInstance().getReference(sNumber).setValue(studentModel)
+                            var reference=
+                                auth.currentUser?.let { it1 ->
+                                    FirebaseDatabase.getInstance().getReference(
+                                        it1.uid)
+                                }
+                            reference?.setValue(student)?.addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    startActivity(Intent(this@LoginActivity,SelectBusActivity::class.java))
+                                    finish()
+                                }
+                                else{
+                                    Toast.makeText(this@LoginActivity,"Failed",Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
                     }
                 }
+
                 departementET.setAdapter(adapter)
                 studentDialog.setView(view).setCancelable(true).show()
             }
@@ -250,7 +184,7 @@ class LoginActivity : AppCompatActivity(),CommonListener {
         Log.d("Check",msg)
     }
 
-    override fun onNavigate() {
+    override fun onNavigate(s: String) {
         startActivity(Intent(this,SelectBusActivity::class.java))
         finish()
     }

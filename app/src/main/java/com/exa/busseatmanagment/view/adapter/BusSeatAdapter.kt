@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 
-class BusSeatAdapter(var context: Context, var seatList: List<SeatModel>, arg: String?): RecyclerView.Adapter<SeatViewHolder>(){
+class BusSeatAdapter(var context: Context, var seatList: List<SeatModel>, arg: String?,val fa:(String)->Unit): RecyclerView.Adapter<SeatViewHolder>(){
     val arg=arg
     var teacherModel:TeacherModel? =null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeatViewHolder {
@@ -48,6 +48,7 @@ class BusSeatAdapter(var context: Context, var seatList: List<SeatModel>, arg: S
             holder.seatButton.setText("${position+1}")
 //        }
         holder.seatButton.setOnClickListener(View.OnClickListener {
+            fa("Name")
             var refurence=FirebaseAuth.getInstance().currentUser?.let { it ->
                 FirebaseDatabase.getInstance().getReference(
                     it.uid)
@@ -73,7 +74,7 @@ class BusSeatAdapter(var context: Context, var seatList: List<SeatModel>, arg: S
 
             }
             yesBtn.setOnClickListener{
-                databaseReference?.child(position.toString())?.setValue(arg?.let { it1 -> SeatModel(it1,
+                databaseReference?.child("seat")?.child(position.toString())?.setValue(arg?.let { it1 -> SeatModel(it1,
                     position.toString(),"Booked",R.color.red) })
                 var databaseReference1=FirebaseDatabase.getInstance().getReference(arg?.substring(1,12)+position)
                 databaseReference1.setValue(teacherModel).addOnCompleteListener {

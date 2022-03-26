@@ -1,23 +1,28 @@
 package com.exa.busseatmanagment.view.ui
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.exa.busseatmanagment.R
-import com.exa.busseatmanagment.databinding.ActivityLoginBinding
 import com.exa.busseatmanagment.databinding.ActivitySelectBusActivityBinding
+import com.exa.busseatmanagment.model.data_class.LatLon
 import com.exa.busseatmanagment.model.data_class.SeatModel
 import com.exa.busseatmanagment.utill.CommonListener
-import com.exa.busseatmanagment.utill.Utility
-import com.exa.busseatmanagment.utill.Utility.showToast
-import com.exa.busseatmanagment.viewmodel.LoginViewModel
 import com.exa.busseatmanagment.viewmodel.SelectBusViewModel
 import com.facebook.CallbackManager
 import com.google.android.gms.tasks.OnCompleteListener
@@ -36,6 +41,10 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
     lateinit var seatlist:ArrayList<SeatModel>
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
     lateinit var progressBar: ProgressBar
+    private var locationManager: LocationManager? = null
+    private var locationListener: LocationListener? = null
+    private val firebaseAuth: FirebaseAuth? = null
+    private var latLon: LatLon? = null
     var binding: ActivitySelectBusActivityBinding? =null
     private lateinit var callbackManager: CallbackManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -147,12 +156,13 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
         binding?.route?.setAdapter(busrouteAdapter)
     }
 
-    override fun onSuccess(msg: String) {
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onSuccess(msg: String, value:Int) {
         val sdf = SimpleDateFormat("dd-M-yyyy")
         val currentDate = sdf.format(Date())
         var ref=msg+currentDate
         var databaseReference= ref?.let { FirebaseDatabase.getInstance().getReference(it) }
-        databaseReference.addValueEventListener(object : ValueEventListener{
+        if (value==0){databaseReference.child("seat").addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     var intent=Intent(this@SelectBusActivity,MainActivity::class.java)
@@ -161,7 +171,7 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
                     startActivity(intent)
                     finish()
                 }else{
-                    databaseReference.setValue(seatlist).addOnCompleteListener(OnCompleteListener {
+                    databaseReference.child("seat").setValue(seatlist).addOnCompleteListener(OnCompleteListener {
                         if(it.isSuccessful){
                             var intent=Intent(this@SelectBusActivity,MainActivity::class.java)
                             intent.putExtra("reference",ref)
@@ -179,7 +189,10 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
                 TODO("Not yet implemented")
             }
 
-        })
+        })}else{
+            getlocation(ref)
+
+        }
 
 
     }
@@ -188,8 +201,28 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
         TODO("Not yet implemented")
     }
 
-    override fun onNavigate() {
-        startActivity(Intent(this,MapsActivity2::class.java))
+    override fun onNavigate(s: String) {
+        val sdf = SimpleDateFormat("dd-M-yyyy")
+        val currentDate = sdf.format(Date())
+        var ref=s+currentDate
+        FirebaseDatabase.getInstance().getReference(ref).child("location").addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+            if (snapshot.exists()){
+                var latLon=snapshot.getValue<LatLon>()
+                var intent=Intent(this@SelectBusActivity,MapsActivity::class.java)
+                intent.putExtra("lat",latLon?.lat)
+                intent.putExtra("lon",latLon?.lon)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this@SelectBusActivity, "No Data found", Toast.LENGTH_SHORT).show()
+            }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -211,7 +244,79 @@ class SelectBusActivity : AppCompatActivity(),CommonListener{
 
     override fun onBackPressed() {
         super.onBackPressed()
-        
+        System.exit(0)
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private fun getlocation(msg: String) {
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        locationListener = object : LocationListener {
+            override fun onLocationChanged(location: Location) {
+                val lat = location.latitude.toString()
+                val lon = location.longitude.toString()
+                latLon = LatLon(lat, lon)
+                val uid: String = auth.getCurrentUser()!!.getUid()
+                latLon?.let {
+                    shareLatLon(it) }
+                val databaseReference = FirebaseDatabase.getInstance().getReference(msg)
+                databaseReference.child("location").setValue(latLon).addOnCompleteListener {
+                    if (it.isSuccessful){
+                        Toast.makeText(this@SelectBusActivity, "Success", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+            override fun onProviderEnabled(provider: String) {}
+            override fun onProviderDisabled(provider: String) {
+                startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            }
+        }
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.INTERNET, Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ), 10
+            )
+            return
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                config()
+            }
+        }
+    }
+
+    private fun shareLatLon(latLon: LatLon) {
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private fun config() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            return
+        }
+        locationListener?.let {
+            locationManager?.requestLocationUpdates(
+                "gps",
+                10000, 0f, it
+            )
+        }
+    }
+
 
 }

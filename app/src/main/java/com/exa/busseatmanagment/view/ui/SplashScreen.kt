@@ -29,3 +29,5 @@ class SplashScreen : AppCompatActivity() {
         }
     }
 }
+
+

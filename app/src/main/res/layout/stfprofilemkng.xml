@@ -110,6 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:hint="Password Length Must be 8"
             app:boxBackgroundMode="outline"
             android:padding="10dp"
             app:boxBackgroundColor="#ececec"
@@ -121,7 +122,6 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="match_parent"
-                android:hint="Password"
                 android:inputType="number"
                 android:id="@+id/stuffPassword"
                 />
